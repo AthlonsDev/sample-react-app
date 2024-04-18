@@ -10,18 +10,19 @@ import {
 import { useState } from "react";
 import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
 import { getWeatherData } from "../api/actions";
+import pizza_image from "../assets/pizza.png";
 
 const WeatherCard: React.FC = () => {
-  const [data, setData] = useState<WeatherData>();
+  const [data, setData] = useState<FoodData>();
   const [loadingState, setLoadingState] = useState(false);
-  const [city, setCity] = useState("");
+  const [food, setFood] = useState("");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
     console.log("Fetching Weather Data...");
-    console.log(city);
+    console.log(food);
     setLoadingState(true);
-    getWeatherData(city)
+    getWeatherData(food)
       .then((res) => {
         setError("");
         if (res) {
@@ -49,12 +50,12 @@ const WeatherCard: React.FC = () => {
         >
           <div className="flex flex-col w-full p-2 space-y-4">
             <Input
-              id="cityname"
+              id="foodname"
               type="text"
-              label="City"
-              value={city}
+              label="food"
+              value={food}
               onChange={(e) => {
-                setCity(e.target.value);
+                setFood(e.target.value);
               }}
             />
             <Button
@@ -72,26 +73,29 @@ const WeatherCard: React.FC = () => {
       {data ? (
         <CardBody>
           <div className="flex flex-col items-center">
-            <h1 className="text-3xl font-bold">{data.city}</h1>
-            {data.temperature > 20 ? (
+            <h1 className="text-5xl font-bold">{data.food}</h1>
+            {data.food === "pizza" ? (
               <div>
-                <TiWeatherSunny className="w-36 h-36" />
+                <img src={pizza_image} className="w-36 h-36" />
               </div>
             ) : (
               <div>
                 <TiWeatherDownpour className="w-36 h-36" />
               </div>
             )}
-            <p className="text-3xl font-bold">{data.temperature}°C</p>
-            <p className="text-lg">Humidity: {data.humidity}%</p>
-            <p className="text-lg">Wind: {data.wind} km/h</p>
-            <p className="text-lg">Rain: {data.rain} %</p>
+            <p className="text-lg">Weight: {data.weight}gr</p>
+            <p className="text-lg">Calories: {data.calories}kcal</p>
+            <p className="text-lg">Price: ${data.price}</p>
+            <p className="text-lg">Availablity: {data.availability}</p>
+            <p className="text-lg">Delivery: {data.delivery}</p>
+            <p className="text-lg">Time to prepare: {data.time_to_prepare} mins</p>
+
           </div>
         </CardBody>
       ) : (
         <CardBody>
           <div className="flex flex-col items-center">
-            <p className="text-xl font-bold">Please enter a city</p>
+            <p className="text-xl font-bold">Please enter a dish</p>
           </div>
         </CardBody>
       )}
