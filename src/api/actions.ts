@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 
 const API_URL = "https://ideal-space-guide-64w5pwv69qqfrvw-3000.app.github.dev/api";
 
-export const getWeatherData = async (food: string): Promise<FoodData> => {
+export const getFoodData = async (food: string): Promise<FoodData> => {
   return new Promise<FoodData>((resolve, reject) => {
     axios
       .get(`${API_URL}/food/${food}`)

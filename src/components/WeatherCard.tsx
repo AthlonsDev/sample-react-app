@@ -8,9 +8,15 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { TiWeatherDownpour, TiWeatherSunny } from "react-icons/ti";
-import { getWeatherData } from "../api/actions";
-import pizza_image from "../assets/pizza.png";
+import { getFoodData } from "../api/actions";
+
+import lasagna_image from "../assets/lasagna.png"; //lasagna icons created by Freepik - Flaticon
+import pizza_image from "../assets/pizza.png"; //Pizza icons created by Freepik - Flaticon
+import salad_image from "../assets/salad.png"; //Salad icons created by Freepik - Flaticon
+import bol_image from "../assets/spaghetti_b.png"; //Bolognese icons created by Freepik - Flaticon
+import carb_image from "../assets/spaghetti_c.png"; //Carbonara icons created by monkik - Flaticon
+import ravioli_image from "../assets/ravioli.png"; //ravioli icons created by Freepik - Flaticon
+import delivery from "../assets/delivery.gif"; //delivery icons created by Freepik - Flaticon
 
 const WeatherCard: React.FC = () => {
   const [data, setData] = useState<FoodData>();
@@ -19,10 +25,10 @@ const WeatherCard: React.FC = () => {
   const [error, setError] = useState("");
 
   const handleSearch = () => {
-    console.log("Fetching Weather Data...");
+    console.log("Fetching Food Data...");
     console.log(food);
     setLoadingState(true);
-    getWeatherData(food)
+    getFoodData(food)
       .then((res) => {
         setError("");
         if (res) {
@@ -40,6 +46,7 @@ const WeatherCard: React.FC = () => {
   };
 
   return (
+
     <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
         <form
@@ -65,7 +72,7 @@ const WeatherCard: React.FC = () => {
               type="submit"
             >
               Search
-            </Button>
+            </Button>         
           </div>
         </form>
       </CardHeader>
@@ -78,16 +85,37 @@ const WeatherCard: React.FC = () => {
               <div>
                 <img src={pizza_image} className="w-36 h-36" />
               </div>
-            ) : (
+            ) : null}
+            {data.food === "salad" ? (
               <div>
-                <TiWeatherDownpour className="w-36 h-36" />
+                <img src={salad_image} className="w-36 h-36" />
               </div>
-            )}
+            ) : null}
+            {data.food === "bolognese" ? (
+              <div>
+                <img src={bol_image} className="w-36 h-36" />
+              </div>
+            ) : null}
+            {data.food === "carbonara" ? (
+              <div>
+                <img src={carb_image} className="w-36 h-36" />
+              </div>
+            ) : null}
+            {data.food === "ravioli" ? (
+              <div>
+                <img src={ravioli_image} className="w-36 h-36" />
+              </div>
+            ) : null}
+            {data.food === "lasagna" ? (
+              <div>
+                <img src={lasagna_image} className="w-36 h-36" />
+              </div>
+            ) : null}
             <p className="text-lg">Weight: {data.weight}gr</p>
             <p className="text-lg">Calories: {data.calories}kcal</p>
             <p className="text-lg">Price: ${data.price}</p>
             <p className="text-lg">Availablity: {data.availability}</p>
-            <p className="text-lg">Delivery: {data.delivery}</p>
+            <p className="text-lg">Delivery: {data.delivery} </p>
             <p className="text-lg">Time to prepare: {data.time_to_prepare} mins</p>
 
           </div>
