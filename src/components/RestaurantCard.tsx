@@ -16,9 +16,8 @@ import salad_image from "../assets/salad.png"; //Salad icons created by Freepik 
 import bol_image from "../assets/spaghetti_b.png"; //Bolognese icons created by Freepik - Flaticon
 import carb_image from "../assets/spaghetti_c.png"; //Carbonara icons created by monkik - Flaticon
 import ravioli_image from "../assets/ravioli.png"; //ravioli icons created by Freepik - Flaticon
-import delivery from "../assets/delivery.gif"; //delivery icons created by Freepik - Flaticon
 
-const WeatherCard: React.FC = () => {
+const RestaurantCard: React.FC = () => {
   const [data, setData] = useState<FoodData>();
   const [loadingState, setLoadingState] = useState(false);
   const [food, setFood] = useState("");
@@ -143,4 +142,4 @@ const WeatherCard: React.FC = () => {
   );
 };
 
-export default WeatherCard;
+export default RestaurantCard;
